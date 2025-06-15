@@ -23,3 +23,40 @@ update_dependencies:
 update_ios_repo:
 	@echo "Updating repo..."
 	cd ios && pod install --repo-update
+
+build_runner:
+	fvm dart run build_runner build -d
+build_runner_watch:
+	fvm dart run build_runner watch -d
+
+dart_format:
+	@echo "Formatting Dart files..."
+	fvm dart format lib test
+
+dart_analyze:
+	@echo "Analyzing Dart files..."
+	fvm dart analyze lib test
+
+dart_test:
+	@echo "Running Dart tests..."
+	fvm dart test
+
+dart_fix:
+	@echo "Applying Dart fixes..."
+	fvm dart fix --apply
+
+# Changelog generation
+changelog:
+	@echo "Generating changelog..."
+	git-cliff --output CHANGELOG.md
+
+# Generate changelog for a specific version (tag)
+changelog_version:
+	@echo "Generating changelog for the latest version..."
+	git-cliff --tag `git describe --tags --abbrev=0` --output CHANGELOG.md
+
+# Install git-cliff if not already installed
+install_git_cliff:
+	@echo "Installing git-cliff..."
+	brew install git-cliff
+

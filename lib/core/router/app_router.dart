@@ -1,17 +1,29 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nested/nested.dart';
 import 'package:paperless/core/router/route_list.dart';
+import 'package:paperless/di/injection.dart';
+import 'package:paperless/drawing/presentation/view/drawing_screen.dart';
+import 'package:paperless/engine/presentation/drawing_engine_bloc.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: RouteList.splash.path,
+  initialLocation: RouteList.home.path,
   routes: [
+    GoRoute(
+      name: RouteList.home.name,
+      path: RouteList.home.path,
+      builder: (context, state) => _Page(
+        providers: [
+          BlocProvider(create: (_) => getIt<DrawingEngineBloc>()..add(const DrawingEngineEvent.initializeEngine())),
+        ],
+        child: DrawingScreen(),
+      ),
+    ),
+
     /*GoRoute(
       name: RouteList.splash.name,
       path: RouteList.splash.path,

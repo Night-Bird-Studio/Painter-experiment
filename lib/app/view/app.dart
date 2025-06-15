@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paperless/counter/counter.dart';
+import 'package:paperless/core/router/app_router.dart';
 import 'package:paperless/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -7,16 +7,16 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
         useMaterial3: true,
       ),
+      routerConfig: router,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
     );
   }
 }

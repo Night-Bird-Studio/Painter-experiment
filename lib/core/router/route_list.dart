@@ -1,8 +1,8 @@
 enum RouteList {
-  splash(name: 'splash', path:'/splash'),
+  splash(name: 'splash', path: '/splash'),
   movies(name: 'movies', path: '/movies'),
-  movieDetail(name: 'movieDetail', path: 'detail', parent: movies);
-
+  movieDetail(name: 'movieDetail', path: 'detail', parent: movies),
+  home(name: 'home', path: '/home');
 
   const RouteList({required this.name, required this.path, RouteList? parent}) : _parent = parent;
 
